@@ -192,18 +192,35 @@ eurosat_project/
 
 ## 🧪 Experimental Results *(fill in after running)*
 
-| Model            | Test Accuracy | Macro F1 | # Params (trainable) | Notes                  |
-|------------------|--------------:|---------:|---------------------:|------------------------|
-| BaselineCNN      |          ___% |    ___%  |              ___ M    | from scratch          |
-| ResNet-50        |          ___% |    ___%  |              ___ M    | partial fine-tune     |
-| EfficientNet-B0  |          ___% |    ___%  |              ___ M    | partial fine-tune     |
+| Model | Test Accuracy | Macro F1 | # Params (trainable) | Notes |
+|-------|--------------|----------|---------------------|-------|
+| BaselineCNN | 89.01% | 88.78% | ~2.1 M | from scratch |
+| ResNet-50 | 98.27% | 98.24% | ~23.5 M (partial) | partial fine-tune |
+| EfficientNet-B0 | 90.59% | 90.41% | ~4.0 M (partial) | partial fine-tune |
 
-**Per-class accuracy (best model)** — see `outputs/metrics.json`.
+**Per-class accuracy (ResNet-50)**
 
-**GradCAM observations** — paste qualitative observations of `outputs/gradcam/`
-images here (e.g., the model focuses on river edges for `River`,
-on dense canopy texture for `Forest`, etc.).
+| Class | Accuracy |
+|-------|---------|
+| AnnualCrop | 99.15% |
+| Forest | 98.42% |
+| HerbaceousVegetation | 97.82% |
+| Highway | 98.98% |
+| Industrial | 98.15% |
+| Pasture | 95.65% |
+| PermanentCrop | 96.57% |
+| Residential | 98.89% |
+| River | 98.13% |
+| SeaLake | 100.00% |
 
+**GradCAM observations**
+- AnnualCrop: focuses on curved field boundary edges
+- Forest: diffuse activation across tree crown clusters
+- Highway: elongated activation following road axis
+- Industrial: high activation over warehouse rooftops
+- River: vertical stripe aligned with water channel
+- SeaLake: attention at water-land boundary (100% accuracy)
+- Pasture: most diffuse activation, hardest class (95.65%)
 ---
 
 ## 🔁 Reproducibility
