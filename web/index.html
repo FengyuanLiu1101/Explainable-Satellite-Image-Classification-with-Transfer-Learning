@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EuroSAT Land Use Classifier</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <header class="site-header">
+        <h1 class="title">
+            <span class="title-bracket">[</span>
+            EuroSAT Land Use Classifier
+            <span class="title-bracket">]</span>
+        </h1>
+        <p class="subtitle">Transfer Learning with ResNet-50 &nbsp;|&nbsp; PyTorch</p>
+        <div class="status" id="serverStatus">checking…</div>
+    </header>
+
+    <main class="container">
+        <!-- ===========================================================
+             Upload card
+             =========================================================== -->
+        <section class="card upload-card">
+            <h2 class="card-title">// Upload Satellite Image</h2>
+
+            <div id="dropZone" class="drop-zone" tabindex="0">
+                <input type="file" id="fileInput" accept="image/*" hidden />
+                <div class="drop-zone-inner">
+                    <div class="drop-icon">⇪</div>
+                    <p class="drop-text">
+                        <strong>Drop an image here</strong> or click to browse
+                    </p>
+                    <p class="drop-hint">PNG / JPG / TIFF · max 10 MB</p>
+                </div>
+            </div>
+
+            <div id="previewWrap" class="preview-wrap hidden">
+                <img id="previewImg" alt="preview" />
+                <div class="preview-meta">
+                    <span id="previewName">–</span>
+                    <button id="clearBtn" class="btn-ghost">Clear</button>
+                </div>
+            </div>
+
+            <button id="classifyBtn" class="btn-primary" disabled>
+                <span class="btn-label">Classify</span>
+                <span class="btn-arrow">→</span>
+            </button>
+            <div id="errorBox" class="error-box hidden"></div>
+        </section>
+
+        <!-- ===========================================================
+             Results card
+             =========================================================== -->
+        <section id="resultsCard" class="card results-card hidden">
+            <h2 class="card-title">// Prediction Results</h2>
+
+            <div class="result-headline">
+                <div class="result-emoji" id="resultEmoji">–</div>
+                <div class="result-class">
+                    <span id="resultClass">–</span>
+                    <small id="resultLatency"></small>
+                </div>
+            </div>
+
+            <div class="confidence-block">
+                <div class="confidence-label">
+                    <span>Confidence</span>
+                    <span id="confidenceValue">0%</span>
+                </div>
+                <div class="confidence-bar">
+                    <div id="confidenceFill" class="confidence-fill"></div>
+                </div>
+            </div>
+
+            <h3 class="section-title">All-class Probabilities</h3>
+            <div id="probList" class="prob-list"></div>
+
+            <h3 class="section-title">GradCAM Visualization</h3>
+            <div class="gradcam-wrap">
+                <figure>
+                    <img id="originalImg" alt="original" />
+                    <figcaption>Input</figcaption>
+                </figure>
+                <figure>
+                    <img id="gradcamImg" alt="GradCAM" />
+                    <figcaption>GradCAM Overlay</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ===========================================================
+             Model comparison card
+             =========================================================== -->
+        <section class="card comparison-card">
+            <h2 class="card-title">// Model Benchmark</h2>
+            <p class="card-hint">
+                Train and evaluate the three models with
+                <code>python train.py --model all</code>; results auto-populate below.
+            </p>
+            <div id="comparisonContent" class="comparison-content">
+                <div class="loading">loading metrics…</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>EuroSAT &middot; Term Project &middot; Deep Learning Course</span>
+        <span class="meta">PyTorch · Flask · GradCAM</span>
+    </footer>
+
+    <script src="/main.js"></script>
+</body>
+</html>
