@@ -190,7 +190,7 @@ eurosat_project/
 
 ---
 
-## 🧪 Experimental Results *(fill in after running)*
+## 🧪 Experimental Results 
 
 | Model | Test Accuracy | Macro F1 | # Params (trainable) | Notes |
 |-------|--------------|----------|---------------------|-------|
